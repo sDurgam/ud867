@@ -1,0 +1,10 @@
+task groovy << {}
+def foo = "bar"
+println "$foo + foo = ${foo + "foo"}"
+task hello {
+description "This is my first gradle task"
+doLast {
+  println "Hello World!"
+}
+}
+

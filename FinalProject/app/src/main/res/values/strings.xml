@@ -4,4 +4,10 @@
     <string name="button_text">Tell Joke</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="joke">joke</string>
+    <string name="localhostIP">http://localhost:8080/_ah/api/</string>
+    <string name="loadingjoke">Loading Joke...</string>
+    <string name="endpointtask">EndpointAsyncTask</string>
+    <string name="loadjokeerror">Failed to load the joke from the server. Make sure server is running.</string>
 </resources>

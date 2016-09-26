@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -18,11 +19,57 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+        }
+        paid {
+                applicationId 'com.udacity.gradle.builditbigger.paid'
+        }
+    }
+}
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
+}
+dependencies {
+    compile 'com.android.support:design:24.2.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':jokeandroidlibrary')
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    // Android runner and rules support`
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+
+    // Espresso support
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // add this for intent mocking support
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+
+    // add this for webview testing support
+    androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
+
+    //Added for AdMob for free version
+    freeCompile 'com.google.android.gms:play-services-ads:9.4.0'
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    // Added for AdMob
-    compile 'com.google.android.gms:play-services-ads:9.4.0'
-}
+//    task connectedChecks(type: GradleBuild) {
+//        tasks = [":app:connectedCheck"]
+//    }
+//
+//    task startServer_RunTests_ShutDown {
+//        dependsOn ":backend:appengineRun"
+//        project(":backend").afterEvaluate {
+//            backend -> backend.extensions.appengine.daemon = true
+//        }
+//        doLast {
+//            connectedChecks.execute()
+//        }
+//        finalizedBy ":backend:appengineStop"
+//    }

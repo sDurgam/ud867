@@ -27,7 +27,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "com.udacity.gradle.flavorspecificactivity"
@@ -40,6 +40,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        free{
+           applicationId "com.udacity.gradle.flavorspecificactivity.free"
+            versionName "1.0-free"
+        }
+        paid{
+            applicationId "com.udacity.gradle.flavorspecificactivity.paid"
+            versionName "1.0-paid"
         }
     }
 }

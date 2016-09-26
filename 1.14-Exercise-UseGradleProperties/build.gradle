@@ -19,7 +19,7 @@ determines the name of the zip file created by "bundleWeb" (Continue passing
 in the webOutputDir property via the command line).
 
 */
-
+ 
 task bundleWeb(type: Zip) {
     baseName = 'web'
     destinationDir = file(webOutputDir)
